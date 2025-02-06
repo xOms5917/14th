@@ -1,0 +1,23 @@
+body{
+    background: pink;
+}
+div{
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: black;
+    text-align: center;
+}
+button{
+    color: black;
+    background: pink; 
+    border: none;
+}
+#move{
+    position: relative;
+}
