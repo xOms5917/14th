@@ -44,4 +44,5 @@ noBtn.addEventListener('click', (e) => { e.preventDefault(); moveNo(); });
 yesBtn.addEventListener('click', () => {
     mainContent.classList.add('hidden');
     celebration.classList.remove('hidden');
+    alert('- from Omar');
 });
