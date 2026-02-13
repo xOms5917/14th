@@ -6,6 +6,10 @@ const celebration = document.getElementById('celebration');
 let count = 0;
 const phrases = ["No", "Nah", "Nuh-uh", "Nope!", "Try again!", "Getting warm!", "Almost!", "Last chance!"];
 
+function myFunction() {
+  alert("- from Omar :) !");
+}
+
 function moveNo() {
     // Break out of the container to allow full screen teleporting
     noBtn.style.position = 'fixed'; 
