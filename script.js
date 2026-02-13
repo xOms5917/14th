@@ -4,44 +4,59 @@ const mainContent = document.getElementById('main-content');
 const celebration = document.getElementById('celebration');
 
 let attemptCount = 0;
-const maxAttempts = 8; // It will teleport 8 times
+const maxAttempts = 8; 
 const phrases = ["No", "Nah", "Nuh-uh", "Nope!", "Try again", "Getting warmer...", "Almost!", "Last chance!"];
 
 function teleportButton() {
-    // 1. Calculate random position across the whole screen
-    const padding = 100;
-    const newX = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-    const newY = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+    // 1. Get window dimensions
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
 
-    // 2. Apply position and high z-index to stay on top
+    // 2. Get button dimensions (so it doesn't partially overflow)
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    // 3. Calculate "Indoor" coordinates 
+    // We subtract the button size and a 20px margin so it never touches the edge
+    const maxX = windowWidth - btnWidth - 20;
+    const maxY = windowHeight - btnHeight - 20;
+
+    const newX = Math.max(20, Math.floor(Math.random() * maxX));
+    const newY = Math.max(20, Math.floor(Math.random() * maxY));
+
+    // 4. Apply position
     noBtn.style.position = 'fixed';
     noBtn.style.left = `${newX}px`;
     noBtn.style.top = `${newY}px`;
+    noBtn.style.transition = "all 0.1s ease-out"; // Makes the "jump" look smooth but fast
     noBtn.style.zIndex = "9999";
 
-    // 3. Cycle through phrases
+    // 5. Update text phrases
     if (attemptCount < phrases.length) {
         noBtn.innerText = phrases[attemptCount];
     }
 
-    // 4. Make Yes grow significantly larger each time
+    // 6. Make Yes button grow
     let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-    yesBtn.style.fontSize = `${currentSize + 12}px`;
-    yesBtn.style.padding = `${parseFloat(window.getComputedStyle(yesBtn).paddingTop) + 6}px ${parseFloat(window.getComputedStyle(yesBtn).paddingLeft) + 12}px`;
-
+    yesBtn.style.fontSize = `${currentSize + 10}px`;
+    
     attemptCount++;
 
-    // 5. After 8 attempts, vanish and update the Yes button
+    // 7. Final vanish and text swap
     if (attemptCount >= maxAttempts) {
         noBtn.style.display = 'none';
         yesBtn.innerText = "C'mon, just do it! ❤️";
-        yesBtn.style.transform = "scale(1.1)"; // Slight extra pop
+        yesBtn.style.transform = "scale(1.2)";
+        yesBtn.style.boxShadow = "0 0 20px #ff4d6d";
     }
 }
 
-// Triggers on hover or click
+// Triggers
 noBtn.addEventListener('mouseover', teleportButton);
-noBtn.addEventListener('click', teleportButton);
+noBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevents clicking it even if she's super fast
+    teleportButton();
+});
 
 // Success action
 yesBtn.addEventListener('click', () => {
