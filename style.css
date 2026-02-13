@@ -10,18 +10,20 @@ body {
 }
 
 .glass-container {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    padding: 3rem;
+    background: rgba(255, 255, 255, 0.9); /* More solid white square */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 3.5rem;
     text-align: center;
-    width: 90%;
-    max-width: 500px;
-    transition: all 0.5s ease;
+    width: 450px;       /* Fixed width for a consistent square look */
+    min-height: 400px;  /* Keeps the square shape even when No departs */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 1;
 }
-
 .icon {
     font-size: 100px;
     margin-bottom: 20px;
@@ -37,11 +39,11 @@ h1 {
 .button-row {
     display: flex;
     justify-content: center;
-    align-items: center; /* Keeps them vertically aligned */
-    gap: 80px;           /* Increased from 30px to 80px for more breathing room */
-    position: relative;
-    min-height: 150px;   /* Added more height so the growing Yes button has space */
-}}
+    align-items: center;
+    gap: 60px;          /* Plenty of space between Yes and No */
+    width: 100%;
+    margin-top: 20px;
+}
 
 button {
     padding: 18px 40px;
@@ -57,14 +59,14 @@ button {
 #yesBtn {
     background-color: #ff4d6d;
     color: white;
-    z-index: 10;
+    white-space: nowrap; /* Keeps text on one line as it grows */
 }
 
 #noBtn {
-    background-color: #ffffff;
-    color: #ff4d6d;
-    position: relative;  /* Changed from absolute to relative for initial layout */
-    z-index: 5;          /* Keep it below the Yes button's priority */
+    background-color: #eee;
+    color: #555;
+    position: relative; /* Starts inside the square */
+    transition: none;   /* Instant teleportation */
 }
 
 .hidden { display: none !important; }
