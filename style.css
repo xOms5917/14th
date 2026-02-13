@@ -28,12 +28,7 @@ body {
     font-size: 800px;
     margin-bottom: 10px;
 }
-.icon2 {
-    font-size: 50px;
-    margin-bottom: 20px;
-    animation: bounce 2s infinite;
-    font-family: 'Poppins', sans-serif;
-    color: #8b1d4a;
+
 h1 {
     color: #d63384;
     font-size: 2rem;
