@@ -37,10 +37,11 @@ h1 {
 .button-row {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    align-items: center; /* Keeps them vertically aligned */
+    gap: 80px;           /* Increased from 30px to 80px for more breathing room */
     position: relative;
-    min-height: 80px;
-}
+    min-height: 150px;   /* Added more height so the growing Yes button has space */
+}}
 
 button {
     padding: 18px 40px;
@@ -62,8 +63,8 @@ button {
 #noBtn {
     background-color: #ffffff;
     color: #ff4d6d;
-    position: absolute; /* Crucial for initial placement */
-    right: 0;
+    position: relative;  /* Changed from absolute to relative for initial layout */
+    z-index: 5;          /* Keep it below the Yes button's priority */
 }
 
 .hidden { display: none !important; }
