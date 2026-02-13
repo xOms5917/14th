@@ -3,63 +3,58 @@ const yesBtn = document.getElementById('yesBtn');
 const mainContent = document.getElementById('main-content');
 const celebration = document.getElementById('celebration');
 
-let attemptCount = 0;
-const maxAttempts = 8; 
-const phrases = ["No", "Nah", "Nuh-uh", "Nope!", "Try again", "Getting warmer...", "Almost!", "Last chance!"];
+let count = 0;
+const phrases = ["No", "Nah", "Nuh-uh", "Nice try!", "Getting warm!", "Try harder!", "Whoops!", "Last one!"];
 
-function teleportButton() {
-    // 1. Get window dimensions
+function moveNo() {
+    // 1. Calculate boundaries (Indoor)
+    // We use window.innerWidth/Height to make sure it doesn't leave the screen
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
+    
+    // Calculate button size to avoid it peaking off screen
+    const btnW = noBtn.offsetWidth;
+    const btnH = noBtn.offsetHeight;
 
-    // 2. Get button dimensions (so it doesn't partially overflow)
-    const btnWidth = noBtn.offsetWidth;
-    const btnHeight = noBtn.offsetHeight;
+    // Random position within safe zone (20px margin)
+    const newX = Math.floor(Math.random() * (windowWidth - btnW - 40)) + 20;
+    const newY = Math.floor(Math.random() * (windowHeight - btnH - 40)) + 20;
 
-    // 3. Calculate "Indoor" coordinates 
-    // We subtract the button size and a 20px margin so it never touches the edge
-    const maxX = windowWidth - btnWidth - 20;
-    const maxY = windowHeight - btnHeight - 20;
-
-    const newX = Math.max(20, Math.floor(Math.random() * maxX));
-    const newY = Math.max(20, Math.floor(Math.random() * maxY));
-
-    // 4. Apply position
+    // 2. Set position to Fixed so it can fly anywhere on screen
     noBtn.style.position = 'fixed';
     noBtn.style.left = `${newX}px`;
     noBtn.style.top = `${newY}px`;
-    noBtn.style.transition = "all 0.1s ease-out"; // Makes the "jump" look smooth but fast
-    noBtn.style.zIndex = "9999";
+    noBtn.style.zIndex = '9999';
 
-    // 5. Update text phrases
-    if (attemptCount < phrases.length) {
-        noBtn.innerText = phrases[attemptCount];
+    // 3. Cycle Text
+    if (count < phrases.length) {
+        noBtn.innerText = phrases[count];
     }
 
-    // 6. Make Yes button grow
-    let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-    yesBtn.style.fontSize = `${currentSize + 10}px`;
-    
-    attemptCount++;
+    // 4. Grow Yes Button
+    let currentFontSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+    yesBtn.style.fontSize = `${currentFontSize + 12}px`;
+    yesBtn.style.padding = `${parseFloat(window.getComputedStyle(yesBtn).paddingTop) + 6}px ${parseFloat(window.getComputedStyle(yesBtn).paddingLeft) + 12}px`;
 
-    // 7. Final vanish and text swap
-    if (attemptCount >= maxAttempts) {
+    count++;
+
+    // 5. Final disappearing act
+    if (count >= 8) {
         noBtn.style.display = 'none';
         yesBtn.innerText = "C'mon, just do it! ❤️";
-        yesBtn.style.transform = "scale(1.2)";
-        yesBtn.style.boxShadow = "0 0 20px #ff4d6d";
+        // Make Yes pulse so it's obvious she has to click it
+        yesBtn.style.animation = "bounce 1s infinite";
     }
 }
 
-// Triggers
-noBtn.addEventListener('mouseover', teleportButton);
+// Attach listeners
+noBtn.addEventListener('mouseenter', moveNo);
 noBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevents clicking it even if she's super fast
-    teleportButton();
+    e.preventDefault();
+    moveNo();
 });
 
-// Success action
 yesBtn.addEventListener('click', () => {
-    mainContent.style.display = 'none';
+    mainContent.classList.add('hidden');
     celebration.classList.remove('hidden');
 });
