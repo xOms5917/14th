@@ -1,23 +1,61 @@
-body{
-    background: pink;
+body {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    overflow: hidden;
 }
-div{
-    width: 300px;
-    height: 100px;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: black;
+
+.container {
     text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
-button{
-    color: black;
-    background: pink; 
-    border: none;
+
+.icon {
+    font-size: 80px;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
 }
-#move{
+
+h1 {
+    color: #d63384;
+}
+
+.buttons {
+    margin-top: 30px;
     position: relative;
+    height: 100px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background-color: #6c757d;
+    color: white;
+    position: absolute;
+}
+
+.hidden { display: none; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
