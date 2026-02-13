@@ -6,72 +6,61 @@ body {
     align-items: center;
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    overflow: hidden;
+    overflow: hidden; /* Prevents scrollbars when the button teleports */
 }
 
 .glass-container {
-    background: rgba(255, 255, 255); /* More solid white square */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 25px;
-    padding: 3.5rem;
+    background: rgba(255, 255, 255, 0.95); /* Solid white square */
+    padding: 3rem;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     text-align: center;
-    width: 450px;       /* Fixed width for a consistent square look */
-    min-height: 400px;  /* Keeps the square shape even when No departs */
+    width: 400px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
-    z-index: 5;
+    z-index: 1;
 }
+
 .icon {
-    font-size: 100px;
-    margin-bottom: 20px;
-    animation: bounce 2s infinite;
+    font-size: 80px;
+    margin-bottom: 10px;
 }
 
 h1 {
-    color: #8b1d4a;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    color: #d63384;
+    font-size: 2rem;
 }
 
 .button-row {
     display: flex;
-    justify-content: center;
+    gap: 50px; /* Spacing between buttons */
+    margin-top: 30px;
     align-items: center;
-    gap: 60px;          /* Plenty of space between Yes and No */
-    width: 100%;
-    margin-top: 20px;
 }
 
 button {
-    padding: 18px 40px;
-    font-size: 1.4rem;
+    padding: 15px 30px;
+    font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 15px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
 }
 
 #yesBtn {
     background-color: #ff4d6d;
     color: white;
-    white-space: nowrap; /* Keeps text on one line as it grows */
+    z-index: 10; /* Stays on top */
 }
 
 #noBtn {
-    background-color: #eee;
+    background-color: #e0e0e0;
     color: #555;
-    position: relative; /* Starts inside the square */
-    transition: none;   /* Instant teleportation */
+    position: relative; /* Stays in the row initially */
 }
 
 .hidden { display: none !important; }
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
